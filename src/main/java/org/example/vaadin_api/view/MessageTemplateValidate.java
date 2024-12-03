@@ -13,8 +13,10 @@ public class MessageTemplateValidate implements Validator<String> {
     private static final String ERROR_MESSAGE = "Не заполено обязательно поле";
     private final ComboBox<String> messageTemplateComboBox;
 
+
     public MessageTemplateValidate(ComboBox<String> messageTemplateComboBox) {
         this.messageTemplateComboBox = messageTemplateComboBox;
+
     }
 
     private Map<String, Boolean> messageTemplateData() {
@@ -28,9 +30,12 @@ public class MessageTemplateValidate implements Validator<String> {
     @Override
     public ValidationResult apply(String phoneValue, ValueContext valueContext) {
         String template = messageTemplateComboBox.getValue(); // Получаем текущее значение шаблона
+
+
         Boolean isMessageTemplateNeedValidation = messageTemplateData().getOrDefault(template, false);
 
         if (isMessageTemplateNeedValidation && (phoneValue == null || phoneValue.trim().isEmpty())) {
+
             return ValidationResult.error(ERROR_MESSAGE);
         }
         return ValidationResult.ok();
